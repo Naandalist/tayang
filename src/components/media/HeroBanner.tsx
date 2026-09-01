@@ -29,7 +29,7 @@ export function HeroBanner({ item }: HeroBannerProps) {
           <p className="text-sm text-muted">
             {yearFromDate(item.date)}
             <span className="mx-1.5 text-accent">·</span>
-            {item.voteAverage.toFixed(1)}
+            {item.voteAverage.toFixed(1)} Pts
           </p>
           {item.overview ? (
             <p className="max-w-xl text-sm leading-relaxed text-paper/80 sm:text-base">

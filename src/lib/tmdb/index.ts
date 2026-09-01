@@ -9,6 +9,7 @@ export {
   getTopRatedMovies,
   getUpcomingMovies,
 } from './movies'
+export { searchTitles } from './search'
 export { getPopularTv, getTopRatedTv, getTvList } from './tv'
 export { TMDB_API_BASE, TMDB_IMAGE_BASE, getTmdbToken } from './env'
 
@@ -21,6 +22,7 @@ export type {
   TmdbGenre,
   TmdbMovie,
   TmdbMovieDetail,
+  TmdbMultiResult,
   TmdbPaginatedResponse,
   TmdbTvDetail,
   TmdbTvShow,

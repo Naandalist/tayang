@@ -10,10 +10,23 @@ export function Footer() {
         >
           <img src="/tmdb.svg" alt="The Movie Database" className="h-8 w-auto" />
         </a>
-        <p className="max-w-xl text-xs leading-relaxed text-muted">
-          This website uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise
-          approved by TMDB.
-        </p>
+        <div className="max-w-xl space-y-2 text-xs leading-relaxed text-muted">
+          <p>
+            This website uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise
+            approved by TMDB.
+          </p>
+          <p>
+            Created by{' '}
+            <a
+              href="https://github.com/Naandalist"
+              target="_blank"
+              rel="noreferrer"
+              className="text-paper underline-offset-4 hover:text-accent hover:underline"
+            >
+              Listiananda Apriliawan
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   )

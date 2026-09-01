@@ -2,16 +2,24 @@ import { HeroSkeleton, MediaRowSkeleton } from '../components/media/CatalogSkele
 import { HeroBanner } from '../components/media/HeroBanner'
 import { MediaRow } from '../components/media/MediaRow'
 import { useMovieList } from '../features/home/useMovieList'
+import { useTvList } from '../features/home/useTvList'
 
 export function HomePage() {
   const nowPlaying = useMovieList('now_playing')
-  const popular = useMovieList('popular')
-  const topRated = useMovieList('top_rated')
+  const popularMovies = useMovieList('popular')
+  const topRatedMovies = useMovieList('top_rated')
   const upcoming = useMovieList('upcoming')
+  const popularTv = useTvList('popular')
+  const topRatedTv = useTvList('top_rated')
 
   const featured = nowPlaying.data?.[0]
   const error =
-    nowPlaying.error ?? popular.error ?? topRated.error ?? upcoming.error
+    nowPlaying.error ??
+    popularMovies.error ??
+    topRatedMovies.error ??
+    upcoming.error ??
+    popularTv.error ??
+    topRatedTv.error
 
   return (
     <div className="space-y-10 pb-16">
@@ -30,20 +38,30 @@ export function HomePage() {
         ) : (
           <MediaRow title="Sedang tayang" items={nowPlaying.data ?? []} />
         )}
-        {popular.isPending ? (
-          <MediaRowSkeleton title="Pilihan penonton" />
+        {popularMovies.isPending ? (
+          <MediaRowSkeleton title="Film populer" />
         ) : (
-          <MediaRow title="Pilihan penonton" items={popular.data ?? []} />
+          <MediaRow title="Film populer" items={popularMovies.data ?? []} />
         )}
-        {topRated.isPending ? (
-          <MediaRowSkeleton title="Nilai tertinggi" />
+        {topRatedMovies.isPending ? (
+          <MediaRowSkeleton title="Film nilai tertinggi" />
         ) : (
-          <MediaRow title="Nilai tertinggi" items={topRated.data ?? []} />
+          <MediaRow title="Film nilai tertinggi" items={topRatedMovies.data ?? []} />
         )}
         {upcoming.isPending ? (
           <MediaRowSkeleton title="Akan datang" />
         ) : (
           <MediaRow title="Akan datang" items={upcoming.data ?? []} />
+        )}
+        {popularTv.isPending ? (
+          <MediaRowSkeleton title="Serial populer" />
+        ) : (
+          <MediaRow title="Serial populer" items={popularTv.data ?? []} />
+        )}
+        {topRatedTv.isPending ? (
+          <MediaRowSkeleton title="Serial nilai tertinggi" />
+        ) : (
+          <MediaRow title="Serial nilai tertinggi" items={topRatedTv.data ?? []} />
         )}
       </div>
     </div>

@@ -1,64 +1,73 @@
 # Tayang
 
-Katalog film dan serial. Data dari [TMDB](https://www.themoviedb.org/), tampilan editorial gelap, bukan clone Netflix.
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=111)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=fff)](https://www.typescriptlang.org)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=fff)](https://vite.dev)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?logo=tailwindcss&logoColor=fff)](https://tailwindcss.com)
+[![React Router](https://img.shields.io/badge/React_Router-7-CA4245?logo=reactrouter&logoColor=fff)](https://reactrouter.com)
+[![TanStack Query](https://img.shields.io/badge/TanStack_Query-5-FF4154?logo=reactquery&logoColor=fff)](https://tanstack.com/query)
+[![pnpm](https://img.shields.io/badge/pnpm-10-F69220?logo=pnpm&logoColor=fff)](https://pnpm.io)
+[![TMDB](https://img.shields.io/badge/API-TMDB-01B4E4)](https://www.themoviedb.org)
 
-Repo: [github.com/Naandalist/tayang](https://github.com/Naandalist/tayang)
+Editorial movie and TV catalog powered by [TMDB](https://www.themoviedb.org/). Dark, restrained UI — not a Netflix clone.
 
-## Fitur
+Repository: [github.com/Naandalist/tayang](https://github.com/Naandalist/tayang)
 
-- Beranda dengan hero dan empat baris: sedang tayang, populer, nilai tertinggi, akan datang
-- Halaman detail film (`/movie/:id`) dan serial (`/tv/:id`)
-- Pencarian campuran lewat `/search/multi`
-- Watchlist tersimpan di `localStorage`
-- State loading, kosong, dan error
+## Features
+
+- Home hero plus four rows: now playing, popular, top rated, upcoming
+- Title pages for movies (`/movie/:id`) and TV shows (`/tv/:id`)
+- Mixed search through `/search/multi`
+- Watchlist persisted in `localStorage`
+- Loading, empty, and error states
 
 ## Stack
 
-- React 19 + TypeScript
+- React 19 and TypeScript
 - Vite 8
 - Tailwind CSS v4
 - React Router 7
 - TanStack Query 5
 - pnpm
 
-## Menjalankan lokal
+## Local setup
 
-Butuh Node 20+ dan pnpm.
+Node 20+ and pnpm are required.
 
 ```bash
 pnpm install
 cp .env.example .env
 ```
 
-Isi `VITE_TMDB_TOKEN` dengan **API Read Access Token** (JWT yang diawali `eyJ`), bukan API Key v3. Token diambil di [TMDB API settings](https://www.themoviedb.org/settings/api).
+Set `VITE_TMDB_TOKEN` to a TMDB **API Read Access Token** (the JWT that starts with `eyJ`), not the short v3 API key. Create one in [TMDB API settings](https://www.themoviedb.org/settings/api).
 
 ```bash
 pnpm dev
 ```
 
-Build produksi:
+Production build:
 
 ```bash
 pnpm build
 pnpm preview
 ```
 
-## Rute
+## Routes
 
-| Path | Halaman |
+| Path | Page |
 | --- | --- |
-| `/` | Katalog |
-| `/search` | Cari judul |
-| `/watchlist` | Judul tersimpan |
-| `/movie/:id` | Detail film |
-| `/tv/:id` | Detail serial |
+| `/` | Catalog |
+| `/search` | Search titles |
+| `/watchlist` | Saved titles |
+| `/movie/:id` | Movie detail |
+| `/tv/:id` | TV detail |
 
 ## Deploy
 
-Cocok di Vercel. Set environment variable `VITE_TMDB_TOKEN` di project settings, lalu deploy dari branch `main`.
+Vercel works with the default Vite preset. Add `VITE_TMDB_TOKEN` in the project environment variables, then deploy `main`.
 
-Jangan commit file `.env`.
+Do not commit `.env`.
 
 ## TMDB
 
-This product uses the TMDB API but is not endorsed or certified by TMDB. Image and title data belong to their respective owners.
+This product uses the TMDB API but is not endorsed or certified by TMDB. Images and titles belong to their respective owners.

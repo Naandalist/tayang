@@ -1,5 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import { useTitleDetail } from '../features/detail/useTitleDetail'
+import { titleToSummary } from '../features/watchlist/toSummary'
+import { useWatchlist } from '../features/watchlist/WatchlistProvider'
 import type { MediaType } from '../lib/tmdb'
 
 type DetailPageProps = {
@@ -34,6 +36,7 @@ export function DetailPage({ mediaType }: DetailPageProps) {
   const { id } = useParams()
   const titleId = parseId(id)
   const detail = useTitleDetail(mediaType, titleId)
+  const watchlist = useWatchlist()
 
   if (detail.isPending) {
     return <DetailSkeleton />
@@ -52,6 +55,7 @@ export function DetailPage({ mediaType }: DetailPageProps) {
   }
 
   const title = detail.data
+  const saved = watchlist.has(title)
 
   return (
     <article className="pb-16">
@@ -91,6 +95,14 @@ export function DetailPage({ mediaType }: DetailPageProps) {
               {title.genres.length > 0 ? (
                 <p className="text-sm text-paper/80">{title.genres.join(' · ')}</p>
               ) : null}
+              <button
+                type="button"
+                onClick={() => watchlist.toggle(titleToSummary(title))}
+                aria-pressed={saved}
+                className="mt-2 text-sm text-accent underline-offset-4 hover:underline"
+              >
+                {saved ? 'Hapus dari watchlist' : 'Simpan ke watchlist'}
+              </button>
             </div>
           </div>
         </div>

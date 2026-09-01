@@ -29,3 +29,19 @@ export function MediaRowSkeleton({ title }: { title: string }) {
     </section>
   )
 }
+
+export function PeopleRowSkeleton({ title }: { title: string }) {
+  return (
+    <section className="space-y-5" aria-busy="true" aria-label={`Memuat ${title}`}>
+      <h2 className="px-4 font-display text-xl font-medium text-paper sm:px-6">{title}</h2>
+      <ul className="flex gap-6 overflow-hidden px-4 sm:gap-8 sm:px-6">
+        {Array.from({ length: 8 }, (_, index) => (
+          <li key={index} className="w-24 shrink-0 sm:w-28">
+            <div className="mx-auto size-24 animate-pulse rounded-full bg-elevated sm:size-28" />
+            <div className="mx-auto mt-3 h-3 w-16 animate-pulse bg-paper/10" />
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

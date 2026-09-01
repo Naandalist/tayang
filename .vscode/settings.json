@@ -15,6 +15,7 @@
   "prettier.jsxSingleQuote": true,
   "prettier.semi": false,
   "prettier.trailingComma": "all",
+  "prettier.printWidth": 100,
   "eslint.validate": [
     "javascript",
     "javascriptreact",

@@ -11,26 +11,32 @@ function parseId(value: string | undefined) {
   return Number.isFinite(id) ? id : undefined
 }
 
+function DetailSkeleton() {
+  return (
+    <div className="relative isolate min-h-[80svh] overflow-hidden bg-elevated" aria-busy="true" aria-label="Memuat detail judul">
+      <div className="absolute inset-0 bg-linear-to-t from-app via-elevated to-elevated" />
+      <div className="relative mx-auto flex min-h-[80svh] max-w-6xl items-end px-4 pb-10 pt-28 sm:px-6 sm:pb-14">
+        <div className="grid w-full items-end gap-6 sm:grid-cols-[180px_minmax(0,1fr)] sm:gap-8">
+          <div className="hidden aspect-2/3 animate-pulse rounded-sm bg-paper/10 sm:block" />
+          <div className="min-w-0 w-full space-y-4">
+            <div className="h-3 w-24 animate-pulse bg-paper/10" />
+            <div className="h-12 w-full max-w-xl animate-pulse bg-paper/10 sm:h-14" />
+            <div className="h-4 w-40 animate-pulse bg-paper/10" />
+            <div className="h-4 w-full max-w-lg animate-pulse bg-paper/10" />
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function DetailPage({ mediaType }: DetailPageProps) {
   const { id } = useParams()
   const titleId = parseId(id)
   const detail = useTitleDetail(mediaType, titleId)
 
   if (detail.isPending) {
-    return (
-      <div className="min-h-[80svh] bg-elevated" aria-busy="true">
-        <div className="mx-auto flex min-h-[80svh] max-w-6xl items-end px-4 pb-12 sm:px-6">
-          <div className="grid w-full gap-8 sm:grid-cols-[180px_1fr]">
-            <div className="aspect-2/3 bg-paper/10" />
-            <div className="space-y-3 self-end">
-              <div className="h-3 w-20 bg-paper/10" />
-              <div className="h-10 w-2/3 bg-paper/10" />
-              <div className="h-16 w-full bg-paper/10" />
-            </div>
-          </div>
-        </div>
-      </div>
-    )
+    return <DetailSkeleton />
   }
 
   if (detail.isError || !detail.data) {

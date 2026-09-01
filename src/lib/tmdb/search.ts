@@ -1,6 +1,6 @@
 import { tmdbFetch } from './client'
-import { movieToSummary, tvToSummary } from './media'
-import type { MediaSummary, TmdbMultiResult, TmdbPaginatedResponse } from './types'
+import { movieToSummary, tvToSummary, type MediaSummary } from './media'
+import type { TmdbMultiResult, TmdbPaginatedResponse } from './types'
 
 export async function searchTitles(query: string, page = 1): Promise<MediaSummary[]> {
   const trimmed = query.trim()

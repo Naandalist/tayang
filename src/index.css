@@ -26,3 +26,11 @@ body {
 #root {
   min-height: 100svh;
 }
+
+.row-scroll {
+  scrollbar-width: none;
+}
+
+.row-scroll::-webkit-scrollbar {
+  display: none;
+}

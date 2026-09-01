@@ -53,4 +53,13 @@ export type TmdbTvDetail = TmdbTvShow & {
   status: string
 }
 
+export type TmdbMultiMovie = TmdbMovie & { media_type: 'movie' }
+export type TmdbMultiTvShow = TmdbTvShow & { media_type: 'tv' }
+export type TmdbMultiPerson = {
+  id: number
+  media_type: 'person'
+  name: string
+}
+export type TmdbMultiResult = TmdbMultiMovie | TmdbMultiTvShow | TmdbMultiPerson
+
 export type MediaType = 'movie' | 'tv'

@@ -1,4 +1,5 @@
 export { TmdbError, tmdbFetch } from './client'
+export { getMovieDetail, getTvDetail } from './details'
 export { backdropUrl, posterUrl, tmdbImageUrl } from './images'
 export { movieToSummary, tvToSummary } from './media'
 export {
@@ -15,4 +16,12 @@ export type { BackdropSize, PosterSize } from './images'
 export type { MediaSummary } from './media'
 export type { MovieListKind } from './movies'
 export type { TvListKind } from './tv'
-export type { MediaType, TmdbMovie, TmdbPaginatedResponse, TmdbTvShow } from './types'
+export type {
+  MediaType,
+  TmdbGenre,
+  TmdbMovie,
+  TmdbMovieDetail,
+  TmdbPaginatedResponse,
+  TmdbTvDetail,
+  TmdbTvShow,
+} from './types'

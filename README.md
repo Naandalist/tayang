@@ -1,75 +1,64 @@
-# React + TypeScript + Vite
+# Tayang
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Katalog film dan serial. Data dari [TMDB](https://www.themoviedb.org/), tampilan editorial gelap, bukan clone Netflix.
 
-Currently, two official plugins are available:
+Repo: [github.com/Naandalist/tayang](https://github.com/Naandalist/tayang)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Fitur
 
-## React Compiler
+- Beranda dengan hero dan empat baris: sedang tayang, populer, nilai tertinggi, akan datang
+- Halaman detail film (`/movie/:id`) dan serial (`/tv/:id`)
+- Pencarian campuran lewat `/search/multi`
+- Watchlist tersimpan di `localStorage`
+- State loading, kosong, dan error
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack
 
-## Expanding the ESLint configuration
+- React 19 + TypeScript
+- Vite 8
+- Tailwind CSS v4
+- React Router 7
+- TanStack Query 5
+- pnpm
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Menjalankan lokal
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Butuh Node 20+ dan pnpm.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+pnpm install
+cp .env.example .env
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Isi `VITE_TMDB_TOKEN` dengan **API Read Access Token** (JWT yang diawali `eyJ`), bukan API Key v3. Token diambil di [TMDB API settings](https://www.themoviedb.org/settings/api).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+pnpm dev
 ```
+
+Build produksi:
+
+```bash
+pnpm build
+pnpm preview
+```
+
+## Rute
+
+| Path | Halaman |
+| --- | --- |
+| `/` | Katalog |
+| `/search` | Cari judul |
+| `/watchlist` | Judul tersimpan |
+| `/movie/:id` | Detail film |
+| `/tv/:id` | Detail serial |
+
+## Deploy
+
+Cocok di Vercel. Set environment variable `VITE_TMDB_TOKEN` di project settings, lalu deploy dari branch `main`.
+
+Jangan commit file `.env`.
+
+## TMDB
+
+This product uses the TMDB API but is not endorsed or certified by TMDB. Image and title data belong to their respective owners.

@@ -1,33 +1,35 @@
-import { Clapperboard } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 import { cn } from '../../lib/cn'
 
 const links = [
-  { to: '/', label: 'Home' },
-  { to: '/search', label: 'Search' },
+  { to: '/', label: 'Beranda' },
+  { to: '/search', label: 'Cari' },
   { to: '/watchlist', label: 'Watchlist' },
 ]
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-20 border-b border-white/10 bg-app/90 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-paper/10 bg-app/85 backdrop-blur-sm">
       <nav
-        className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-4"
-        aria-label="Primary"
+        className="mx-auto flex max-w-6xl items-center justify-between gap-8 px-4 py-3"
+        aria-label="Navigasi utama"
       >
-        <NavLink to="/" className="flex items-center gap-2 text-lg font-semibold tracking-tight">
-          <Clapperboard className="size-5 text-accent" aria-hidden="true" />
+        <NavLink
+          to="/"
+          className="font-display text-xl font-medium tracking-tight text-paper"
+        >
           Tayang
+          <span className="ml-2 inline-block h-1.5 w-1.5 rounded-full bg-accent align-middle" aria-hidden="true" />
         </NavLink>
-        <ul className="flex items-center gap-1 text-sm">
+        <ul className="flex items-center gap-6 text-sm">
           {links.map((link) => (
             <li key={link.to}>
               <NavLink
                 to={link.to}
                 className={({ isActive }) =>
                   cn(
-                    'rounded-md px-3 py-2 text-muted transition-colors hover:text-white',
-                    isActive && 'bg-white/10 text-white',
+                    'text-muted transition-colors hover:text-paper',
+                    isActive && 'text-paper',
                   )
                 }
               >

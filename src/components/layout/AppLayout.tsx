@@ -1,13 +1,15 @@
 import { Outlet } from 'react-router-dom'
+import { Footer } from './Footer'
 import { Navbar } from './Navbar'
 
 export function AppLayout() {
   return (
-    <div className="min-h-svh bg-app font-sans text-paper">
+    <div className="flex min-h-svh flex-col bg-app font-sans text-paper">
       <Navbar />
-      <main>
+      <main className="flex-1">
         <Outlet />
       </main>
+      <Footer />
     </div>
   )
 }

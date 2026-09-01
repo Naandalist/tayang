@@ -3,11 +3,9 @@
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=111)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=fff)](https://www.typescriptlang.org)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=fff)](https://vite.dev)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?logo=tailwindcss&logoColor=fff)](https://tailwindcss.com)
 [![React Router](https://img.shields.io/badge/React_Router-7-CA4245?logo=reactrouter&logoColor=fff)](https://reactrouter.com)
 [![TanStack Query](https://img.shields.io/badge/TanStack_Query-5-FF4154?logo=reactquery&logoColor=fff)](https://tanstack.com/query)
 [![pnpm](https://img.shields.io/badge/pnpm-10-F69220?logo=pnpm&logoColor=fff)](https://pnpm.io)
-[![TMDB](https://img.shields.io/badge/API-TMDB-01B4E4)](https://www.themoviedb.org)
 
 Editorial movie and TV catalog powered by [TMDB](https://www.themoviedb.org/). Dark, restrained UI — not a Netflix clone.
 
@@ -54,13 +52,13 @@ pnpm preview
 
 ## Routes
 
-| Path | Page |
-| --- | --- |
-| `/` | Catalog |
-| `/search` | Search titles |
-| `/watchlist` | Saved titles |
-| `/movie/:id` | Movie detail |
-| `/tv/:id` | TV detail |
+| Path         | Page          |
+| ------------ | ------------- |
+| `/`          | Catalog       |
+| `/search`    | Search titles |
+| `/watchlist` | Saved titles  |
+| `/movie/:id` | Movie detail  |
+| `/tv/:id`    | TV detail     |
 
 ## Deploy
 

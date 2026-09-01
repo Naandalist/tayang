@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import type { MediaSummary } from '../../lib/tmdb'
 
 type HeroBannerProps = {
@@ -35,6 +36,12 @@ export function HeroBanner({ item }: HeroBannerProps) {
               {item.overview}
             </p>
           ) : null}
+          <Link
+            to={`/${item.mediaType}/${item.id}`}
+            className="inline-block text-sm text-accent underline-offset-4 hover:underline"
+          >
+            Lihat detail
+          </Link>
         </div>
       </div>
     </section>

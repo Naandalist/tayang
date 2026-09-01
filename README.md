@@ -9,12 +9,13 @@
 
 Editorial movie and TV catalog powered by [TMDB](https://www.themoviedb.org/). Dark, restrained UI — not a Netflix clone.
 
-Repository: [github.com/Naandalist/tayang](https://github.com/Naandalist/tayang)
+- Repository: [github.com/Naandalist/tayang](https://github.com/Naandalist/tayang)
+- Live demo: add the Vercel URL here after the first production deploy
 
 ## Features
 
-- Home hero plus four rows: now playing, popular, top rated, upcoming
-- Title pages for movies (`/movie/:id`) and TV shows (`/tv/:id`)
+- Home hero plus catalog rows for movies, TV shows, and popular people
+- Detail pages for movies (`/movie/:id`), TV shows (`/tv/:id`), and people (`/person/:id`)
 - Mixed search through `/search/multi`
 - Watchlist persisted in `localStorage`
 - Loading, empty, and error states
@@ -28,43 +29,60 @@ Repository: [github.com/Naandalist/tayang](https://github.com/Naandalist/tayang)
 - TanStack Query 5
 - pnpm
 
-## Local setup
+## Installation and usage
 
-Node 20+ and pnpm are required.
+### Requirements
+
+- Node.js 20+
+- pnpm
+- A TMDB account and **API Read Access Token** (JWT starting with `eyJ`), not the short v3 API key
+
+Create a token in [TMDB API settings](https://www.themoviedb.org/settings/api).
+
+### Install
 
 ```bash
 pnpm install
 cp .env.example .env
 ```
 
-Set `VITE_TMDB_TOKEN` to a TMDB **API Read Access Token** (the JWT that starts with `eyJ`), not the short v3 API key. Create one in [TMDB API settings](https://www.themoviedb.org/settings/api).
+Open `.env` and set:
+
+```bash
+VITE_TMDB_TOKEN=your_tmdb_read_access_token
+```
+
+### Run
 
 ```bash
 pnpm dev
 ```
 
-Production build:
+The app starts at `http://localhost:5173`.
+
+### Build
 
 ```bash
 pnpm build
 pnpm preview
 ```
 
-## Routes
+### Deploy
 
-| Path         | Page          |
-| ------------ | ------------- |
-| `/`          | Catalog       |
-| `/search`    | Search titles |
-| `/watchlist` | Saved titles  |
-| `/movie/:id` | Movie detail  |
-| `/tv/:id`    | TV detail     |
-
-## Deploy
-
-Vercel works with the default Vite preset. Add `VITE_TMDB_TOKEN` in the project environment variables, then deploy `main`.
+Vercel works with the default Vite preset. Add `VITE_TMDB_TOKEN` as a project environment variable for Production and Preview, then deploy `main`.
 
 Do not commit `.env`.
+
+## Routes
+
+| Path | Page |
+| --- | --- |
+| `/` | Catalog |
+| `/search` | Search titles |
+| `/watchlist` | Saved titles |
+| `/movie/:id` | Movie detail |
+| `/tv/:id` | TV detail |
+| `/person/:id` | Person detail |
 
 ## TMDB
 

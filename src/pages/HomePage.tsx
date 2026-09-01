@@ -1,13 +1,13 @@
 export function HomePage() {
   return (
-    <section className="space-y-4">
-      <p className="text-sm uppercase tracking-[0.2em] text-muted">Catalog</p>
-      <h1 className="max-w-2xl text-4xl font-semibold tracking-tight sm:text-5xl">
-        Movie and TV shows, ready for the next row.
+    <section className="max-w-2xl space-y-5">
+      <p className="text-xs uppercase tracking-[0.28em] text-accent">Katalog</p>
+      <h1 className="font-display text-4xl font-medium leading-[1.15] tracking-tight text-paper sm:text-6xl">
+        Film dan serial yang sedang tayang.
       </h1>
-      <p className="max-w-xl text-muted">
-        Stack is in place: React, Vite, TypeScript, Tailwind, React Router, and
-        TanStack Query. TMDB data comes next.
+      <p className="max-w-lg text-base leading-relaxed text-muted">
+        Katalog editorial dari TMDB. Baris judul dan detail menyusul setelah
+        lapisan data terpasang.
       </p>
     </section>
   )

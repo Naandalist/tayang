@@ -1,3 +1,4 @@
+import { HeroSkeleton, MediaRowSkeleton } from '../components/media/CatalogSkeletons'
 import { HeroBanner } from '../components/media/HeroBanner'
 import { MediaRow } from '../components/media/MediaRow'
 import { useMovieList } from '../features/home/useMovieList'
@@ -14,6 +15,7 @@ export function HomePage() {
 
   return (
     <div className="space-y-10 pb-16">
+      {nowPlaying.isPending ? <HeroSkeleton /> : null}
       {featured ? <HeroBanner item={featured} /> : null}
 
       {error ? (
@@ -23,10 +25,26 @@ export function HomePage() {
       ) : null}
 
       <div className="space-y-10">
-        <MediaRow title="Sedang tayang" items={nowPlaying.data ?? []} />
-        <MediaRow title="Pilihan penonton" items={popular.data ?? []} />
-        <MediaRow title="Nilai tertinggi" items={topRated.data ?? []} />
-        <MediaRow title="Akan datang" items={upcoming.data ?? []} />
+        {nowPlaying.isPending ? (
+          <MediaRowSkeleton title="Sedang tayang" />
+        ) : (
+          <MediaRow title="Sedang tayang" items={nowPlaying.data ?? []} />
+        )}
+        {popular.isPending ? (
+          <MediaRowSkeleton title="Pilihan penonton" />
+        ) : (
+          <MediaRow title="Pilihan penonton" items={popular.data ?? []} />
+        )}
+        {topRated.isPending ? (
+          <MediaRowSkeleton title="Nilai tertinggi" />
+        ) : (
+          <MediaRow title="Nilai tertinggi" items={topRated.data ?? []} />
+        )}
+        {upcoming.isPending ? (
+          <MediaRowSkeleton title="Akan datang" />
+        ) : (
+          <MediaRow title="Akan datang" items={upcoming.data ?? []} />
+        )}
       </div>
     </div>
   )

@@ -3,6 +3,7 @@ import { AppLayout } from './components/layout/AppLayout'
 import { DetailPage } from './pages/DetailPage'
 import { HomePage } from './pages/HomePage'
 import { NotFoundPage } from './pages/NotFoundPage'
+import { PersonPage } from './pages/PersonPage'
 import { SearchPage } from './pages/SearchPage'
 import { WatchlistPage } from './pages/WatchlistPage'
 
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="watchlist" element={<WatchlistPage />} />
         <Route path="movie/:id" element={<DetailPage mediaType="movie" />} />
         <Route path="tv/:id" element={<DetailPage mediaType="tv" />} />
+        <Route path="person/:id" element={<PersonPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

@@ -31,7 +31,7 @@ export function MediaCard({ item, className }: MediaCardProps) {
         <p className="mt-0.5 text-xs text-muted">
           {yearFromDate(item.date)}
           <span className="mx-1.5 text-accent">·</span>
-          {item.voteAverage.toFixed(1)}
+          {item.voteAverage.toFixed(1)} Pts
         </p>
       </Link>
     </article>

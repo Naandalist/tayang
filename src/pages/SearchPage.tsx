@@ -9,9 +9,10 @@ export function SearchPage() {
   const debouncedQuery = useDebouncedValue(query, 400)
   const search = useTitleSearch(debouncedQuery)
   const results = search.data ?? []
-  const showHint = query.trim().length < 2
-  const showEmpty =
-    !showHint && !search.isPending && !search.isError && results.length === 0
+  const hasQuery = query.trim().length >= 2
+  const canSearch = debouncedQuery.trim().length >= 2
+  const showSkeleton = canSearch && search.isFetching
+  const showEmpty = canSearch && search.isSuccess && results.length === 0
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
@@ -31,7 +32,7 @@ export function SearchPage() {
         className="mt-8 w-full border-b border-paper/20 bg-transparent py-3 text-lg text-paper outline-none placeholder:text-muted focus:border-accent"
       />
 
-      {showHint ? (
+      {!hasQuery ? (
         <p className="mt-6 text-sm text-muted">Ketik minimal dua huruf.</p>
       ) : null}
 
@@ -39,7 +40,7 @@ export function SearchPage() {
         <p className="mt-6 text-sm text-muted">Pencarian gagal. Coba lagi beberapa saat.</p>
       ) : null}
 
-      {search.isPending ? (
+      {showSkeleton ? (
         <ul className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4 lg:grid-cols-6" aria-busy="true">
           {Array.from({ length: 12 }, (_, index) => (
             <li key={index}>
@@ -54,7 +55,7 @@ export function SearchPage() {
         <p className="mt-6 text-sm text-muted">Tidak ada film atau serial untuk “{debouncedQuery}”.</p>
       ) : null}
 
-      {results.length > 0 ? (
+      {!showSkeleton && results.length > 0 ? (
         <ul className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4 lg:grid-cols-6">
           {results.map((item) => (
             <li key={`${item.mediaType}-${item.id}`}>

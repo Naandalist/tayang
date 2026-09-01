@@ -1,7 +1,9 @@
-import { HeroSkeleton, MediaRowSkeleton } from '../components/media/CatalogSkeletons'
+import { HeroSkeleton, MediaRowSkeleton, PeopleRowSkeleton } from '../components/media/CatalogSkeletons'
 import { HeroBanner } from '../components/media/HeroBanner'
 import { MediaRow } from '../components/media/MediaRow'
+import { PeopleRow } from '../components/media/PeopleRow'
 import { useMovieList } from '../features/home/useMovieList'
+import { usePopularPeople } from '../features/home/usePopularPeople'
 import { useTvList } from '../features/home/useTvList'
 
 export function HomePage() {
@@ -11,6 +13,7 @@ export function HomePage() {
   const upcoming = useMovieList('upcoming')
   const popularTv = useTvList('popular')
   const topRatedTv = useTvList('top_rated')
+  const people = usePopularPeople()
 
   const featured = nowPlaying.data?.[0]
   const error =
@@ -19,7 +22,8 @@ export function HomePage() {
     topRatedMovies.error ??
     upcoming.error ??
     popularTv.error ??
-    topRatedTv.error
+    topRatedTv.error ??
+    people.error
 
   return (
     <div className="space-y-10 pb-16">
@@ -62,6 +66,11 @@ export function HomePage() {
           <MediaRowSkeleton title="Serial nilai tertinggi" />
         ) : (
           <MediaRow title="Serial nilai tertinggi" items={topRatedTv.data ?? []} />
+        )}
+        {people.isPending ? (
+          <PeopleRowSkeleton title="Orang populer" />
+        ) : (
+          <PeopleRow title="Orang populer" people={people.data ?? []} />
         )}
       </div>
     </div>

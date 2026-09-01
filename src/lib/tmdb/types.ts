@@ -5,6 +5,11 @@ export type TmdbPaginatedResponse<T> = {
   total_results: number
 }
 
+export type TmdbGenre = {
+  id: number
+  name: string
+}
+
 export type TmdbMovie = {
   id: number
   title: string
@@ -30,6 +35,22 @@ export type TmdbTvShow = {
   popularity: number
   genre_ids: number[]
   original_language: string
+}
+
+export type TmdbMovieDetail = TmdbMovie & {
+  tagline: string
+  runtime: number | null
+  genres: TmdbGenre[]
+  status: string
+}
+
+export type TmdbTvDetail = TmdbTvShow & {
+  tagline: string
+  genres: TmdbGenre[]
+  number_of_seasons: number
+  number_of_episodes: number
+  episode_run_time: number[]
+  status: string
 }
 
 export type MediaType = 'movie' | 'tv'

@@ -90,10 +90,19 @@ export function DetailPage({ mediaType }: DetailPageProps) {
               <p className="text-sm text-muted">
                 {title.meta}
                 <span className="mx-1.5 text-accent">·</span>
-                {title.voteAverage.toFixed(1)}
+                {title.voteAverage.toFixed(1)} Pts
               </p>
               {title.genres.length > 0 ? (
-                <p className="text-sm text-paper/80">{title.genres.join(' · ')}</p>
+                <ul className="flex flex-wrap gap-2 pt-1">
+                  {title.genres.map((genre) => (
+                    <li
+                      key={genre}
+                      className="border border-paper/20 px-2 py-1 text-[11px] uppercase tracking-[0.16em] text-paper/80"
+                    >
+                      {genre}
+                    </li>
+                  ))}
+                </ul>
               ) : null}
               <button
                 type="button"

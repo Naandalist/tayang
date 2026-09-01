@@ -1,10 +1,11 @@
-import { useId, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { MediaCard } from '../components/media/MediaCard'
 import { useTitleSearch } from '../features/search/useTitleSearch'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
 
 export function SearchPage() {
   const inputId = useId()
+  const inputRef = useRef<HTMLInputElement>(null)
   const [query, setQuery] = useState('')
   const debouncedQuery = useDebouncedValue(query, 400)
   const search = useTitleSearch(debouncedQuery)
@@ -13,6 +14,10 @@ export function SearchPage() {
   const canSearch = debouncedQuery.trim().length >= 2
   const showSkeleton = canSearch && search.isFetching
   const showEmpty = canSearch && search.isSuccess && results.length === 0
+
+  useEffect(() => {
+    inputRef.current?.focus()
+  }, [])
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
@@ -23,12 +28,14 @@ export function SearchPage() {
         Cari film atau serial
       </label>
       <input
+        ref={inputRef}
         id={inputId}
         type="search"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Spider-Man, The Bear, Parasite"
         autoComplete="off"
+        autoFocus
         className="mt-8 w-full border-b border-paper/20 bg-transparent py-3 text-lg text-paper outline-none placeholder:text-muted focus:border-accent"
       />
 

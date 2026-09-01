@@ -69,6 +69,38 @@ export type TmdbPerson = {
   known_for: TmdbKnownFor[]
 }
 
+export type TmdbCredit = {
+  id: number
+  media_type: 'movie' | 'tv'
+  title?: string
+  name?: string
+  overview?: string
+  poster_path: string | null
+  backdrop_path: string | null
+  release_date?: string
+  first_air_date?: string
+  vote_average?: number
+  popularity?: number
+  character?: string
+}
+
+export type TmdbPersonDetail = {
+  id: number
+  name: string
+  biography: string
+  birthday: string | null
+  deathday: string | null
+  place_of_birth: string | null
+  profile_path: string | null
+  known_for_department: string
+  popularity: number
+  also_known_as: string[]
+  combined_credits?: {
+    cast: TmdbCredit[]
+    crew: TmdbCredit[]
+  }
+}
+
 export type TmdbMultiMovie = TmdbMovie & { media_type: 'movie' }
 export type TmdbMultiTvShow = TmdbTvShow & { media_type: 'tv' }
 export type TmdbMultiPerson = {

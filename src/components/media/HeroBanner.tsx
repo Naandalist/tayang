@@ -43,10 +43,10 @@ export function HeroBanner({ items }: HeroBannerProps) {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
           setPaused(false)
         }
-      }
+      }}
     >
       {slides.map((slide, slideIndex) =>
         slide.backdropUrl ? (

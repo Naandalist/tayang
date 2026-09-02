@@ -3,6 +3,8 @@ import { backdropUrl, posterUrl, profileUrl } from './images'
 import type { MediaSummary } from './media'
 import type { TmdbCredit, TmdbPaginatedResponse, TmdbPerson, TmdbPersonDetail } from './types'
 
+const MIN_CREDIT_POPULARITY = 8
+
 export type PersonSummary = {
   id: number
   name: string
@@ -39,9 +41,13 @@ export function personToSummary(person: TmdbPerson): PersonSummary {
   }
 }
 
+function isUsableCredit(credit: TmdbCredit) {
+  return !credit.adult && Boolean(credit.poster_path) && (credit.popularity ?? 0) >= MIN_CREDIT_POPULARITY
+}
+
 function creditToSummary(credit: TmdbCredit): MediaSummary | null {
   const title = credit.title ?? credit.name
-  if (!title) {
+  if (!title || !isUsableCredit(credit)) {
     return null
   }
 
@@ -62,7 +68,11 @@ export function personDetailToView(person: TmdbPersonDetail): PersonDetail {
     .sort((left, right) => (right.popularity ?? 0) - (left.popularity ?? 0))
     .map(creditToSummary)
     .filter((item): item is MediaSummary => item !== null)
-    .filter((item, index, list) => list.findIndex((entry) => `${entry.mediaType}-${entry.id}` === `${item.mediaType}-${item.id}`) === index)
+    .filter(
+      (item, index, list) =>
+        list.findIndex((entry) => `${entry.mediaType}-${entry.id}` === `${item.mediaType}-${item.id}`) ===
+        index,
+    )
     .slice(0, 18)
 
   return {

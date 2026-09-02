@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { MediaCard } from '../components/media/MediaCard'
 import { useWatchlist } from '../features/watchlist/WatchlistProvider'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 export function WatchlistPage() {
+  useDocumentTitle('Watchlist · Tayang')
   const { items, toggle } = useWatchlist()
 
   return (

@@ -2,18 +2,12 @@ import { Link, useParams } from 'react-router-dom'
 import { MediaImage } from '../components/media/MediaImage'
 import { MediaRow } from '../components/media/MediaRow'
 import { usePersonDetail } from '../features/person/usePersonDetail'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
+import { formatYear } from '../lib/formatYear'
 
 function parseId(value: string | undefined) {
   const id = Number(value)
   return Number.isFinite(id) ? id : undefined
-}
-
-function formatDate(value: string | null) {
-  if (!value) {
-    return null
-  }
-
-  return value.slice(0, 4)
 }
 
 function PersonSkeleton() {
@@ -36,6 +30,7 @@ export function PersonPage() {
   const { id } = useParams()
   const personId = parseId(id)
   const person = usePersonDetail(personId)
+  useDocumentTitle(person.data ? `${person.data.name} · Tayang` : 'Tayang')
 
   if (person.isPending) {
     return <PersonSkeleton />
@@ -54,7 +49,9 @@ export function PersonPage() {
   }
 
   const profile = person.data
-  const years = [formatDate(profile.birthday), formatDate(profile.deathday)].filter(Boolean).join(' – ')
+  const years = [formatYear(profile.birthday), formatYear(profile.deathday)]
+    .filter((value) => value !== '-')
+    .join(' - ')
 
   return (
     <article className="pb-16">

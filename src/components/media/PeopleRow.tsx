@@ -18,16 +18,23 @@ export function PeopleRow({ title, people }: PeopleRowProps) {
       <h2 className="px-4 font-display text-xl font-medium text-paper sm:px-6">{title}</h2>
       <HorizontalScroller
         label={title}
-        className="px-4 pb-2 sm:px-6"
-        controlClassName="top-14"
+        className="px-4 pt-2 pb-2 sm:px-6"
+        controlClassName="top-16"
       >
         <ul className="flex gap-6 sm:gap-8">
           {people.map((person) => (
-            <li key={person.id} className="w-24 shrink-0 text-center sm:w-28">
-              <Link to={`/person/${person.id}`} className="block focus-visible:outline-none">
+            <li
+              key={person.id}
+              className="w-24 shrink-0 text-center transition-transform duration-300 ease-out hover:-translate-y-1.5 sm:w-28"
+            >
+              <Link to={`/person/${person.id}`} className="group block focus-visible:outline-none">
                 <div className="mx-auto size-24 overflow-hidden rounded-full bg-elevated sm:size-28">
                   {person.photoUrl ? (
-                    <MediaImage src={person.photoUrl} alt={person.name} className="object-top" />
+                    <MediaImage
+                      src={person.photoUrl}
+                      alt={person.name}
+                      className="object-top transition-opacity duration-300 ease-out group-hover:opacity-80"
+                    />
                   ) : (
                     <div className="flex size-full items-center justify-center text-xs text-muted">
                       {person.name.slice(0, 1)}

@@ -27,6 +27,7 @@ Editorial movie and TV catalog powered by [TMDB](https://www.themoviedb.org/). D
 - Tailwind CSS v4
 - React Router 7
 - TanStack Query 5
+- Vitest and Playwright
 - pnpm
 
 ## Installation and usage
@@ -66,6 +67,16 @@ The app starts at `http://localhost:5173`.
 pnpm build
 pnpm preview
 ```
+
+### Test
+
+```bash
+pnpm test
+pnpm exec playwright install chromium
+pnpm test:e2e
+```
+
+Unit tests cover mappers, image URLs, watchlist storage, and search debounce. End-to-end tests cover navigation, search focus, and empty states. They do not call TMDB.
 
 ### Deploy
 

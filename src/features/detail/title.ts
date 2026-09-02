@@ -1,3 +1,4 @@
+import { formatYear } from '../../lib/formatYear'
 import { backdropUrl, posterUrl } from '../../lib/tmdb'
 import type { MediaType, TmdbMovieDetail, TmdbTvDetail } from '../../lib/tmdb'
 
@@ -15,10 +16,6 @@ export type TitleDetail = {
   backdropUrl: string | null
 }
 
-function yearFromDate(date: string) {
-  return date.slice(0, 4) || '—'
-}
-
 export function movieDetailToTitle(movie: TmdbMovieDetail): TitleDetail {
   const runtime = movie.runtime ? `${movie.runtime} min` : null
 
@@ -31,7 +28,7 @@ export function movieDetailToTitle(movie: TmdbMovieDetail): TitleDetail {
     date: movie.release_date,
     voteAverage: movie.vote_average,
     genres: movie.genres.map((genre) => genre.name),
-    meta: [yearFromDate(movie.release_date), runtime].filter(Boolean).join(' · '),
+    meta: [formatYear(movie.release_date), runtime].filter(Boolean).join(' · '),
     posterUrl: posterUrl(movie.poster_path),
     backdropUrl: backdropUrl(movie.backdrop_path),
   }
@@ -50,7 +47,7 @@ export function tvDetailToTitle(show: TmdbTvDetail): TitleDetail {
     date: show.first_air_date,
     voteAverage: show.vote_average,
     genres: show.genres.map((genre) => genre.name),
-    meta: [yearFromDate(show.first_air_date), seasons].filter(Boolean).join(' · '),
+    meta: [formatYear(show.first_air_date), seasons].filter(Boolean).join(' · '),
     posterUrl: posterUrl(show.poster_path),
     backdropUrl: backdropUrl(show.backdrop_path),
   }

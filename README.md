@@ -8,7 +8,7 @@
 [![TanStack Query](https://img.shields.io/badge/TanStack_Query-5-FF4154?logo=reactquery&logoColor=fff)](https://tanstack.com/query)
 [![pnpm](https://img.shields.io/badge/pnpm-10-F69220?logo=pnpm&logoColor=fff)](https://pnpm.io)
 
-Editorial movie and TV catalog powered by [TMDB](https://www.themoviedb.org/). Dark, restrained UI — not a Netflix clone.
+Editorial movie and TV catalog powered by [TMDB](https://www.themoviedb.org/). Dark, restrained UI. Not a Netflix clone.
 
 - Live demo: [tayang.naandalist.com](https://tayang.naandalist.com/)
 - Repository: [github.com/Naandalist/tayang](https://github.com/Naandalist/tayang)

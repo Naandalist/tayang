@@ -16,6 +16,7 @@ export function Navbar() {
       >
         <NavLink
           to="/"
+          aria-label="Tayang, beranda"
           className="font-display text-xl font-medium tracking-tight text-paper"
         >
           Tayang

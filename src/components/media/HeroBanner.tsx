@@ -80,7 +80,7 @@ export function HeroBanner({ items }: HeroBannerProps) {
             Lihat detail
           </Link>
           {slides.length > 1 ? (
-            <div className="flex gap-2 pt-4" aria-hidden="true">
+            <div className="flex gap-2 pt-4">
               {slides.map((slide, slideIndex) => (
                 <button
                   key={`${slide.mediaType}-${slide.id}-dot`}

@@ -1,15 +1,12 @@
 import { Link } from 'react-router-dom'
 import { cn } from '../../lib/cn'
+import { formatYear } from '../../lib/formatYear'
 import type { MediaSummary } from '../../lib/tmdb'
 import { MediaImage } from './MediaImage'
 
 type MediaCardProps = {
   item: MediaSummary
   className?: string
-}
-
-function yearFromDate(date: string) {
-  return date.slice(0, 4) || '—'
 }
 
 export function MediaCard({ item, className }: MediaCardProps) {
@@ -23,7 +20,7 @@ export function MediaCard({ item, className }: MediaCardProps) {
       <Link
         to={`/${item.mediaType}/${item.id}`}
         className="group block"
-        aria-label={`${item.title}, ${yearFromDate(item.date)}, ${item.voteAverage.toFixed(1)} Pts`}
+        aria-label={`${item.title}, ${formatYear(item.date)}, ${item.voteAverage.toFixed(1)} Pts`}
       >
         <div className="aspect-2/3 overflow-hidden rounded-sm bg-elevated">
           {item.posterUrl ? (
@@ -38,7 +35,7 @@ export function MediaCard({ item, className }: MediaCardProps) {
         </div>
         <h3 className="mt-2 line-clamp-2 text-sm leading-snug text-paper">{item.title}</h3>
         <p className="mt-0.5 text-xs text-muted">
-          {yearFromDate(item.date)}
+          {formatYear(item.date)}
           <span className="mx-1.5 text-accent">·</span>
           {item.voteAverage.toFixed(1)} Pts
         </p>

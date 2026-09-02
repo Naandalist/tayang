@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { MediaSummary } from '../../lib/tmdb'
+import { MediaImage } from './MediaImage'
 
 type HeroBannerProps = {
   item: MediaSummary
@@ -13,10 +14,11 @@ export function HeroBanner({ item }: HeroBannerProps) {
   return (
     <section className="relative isolate min-h-[72svh] overflow-hidden bg-elevated">
       {item.backdropUrl ? (
-        <img
+        <MediaImage
           src={item.backdropUrl}
           alt=""
-          className="absolute inset-0 size-full object-cover"
+          loading="eager"
+          className="absolute inset-0"
         />
       ) : null}
       <div className="absolute inset-0 bg-linear-to-t from-app via-app/70 to-app/20" />

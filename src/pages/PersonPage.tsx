@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
+import { MediaImage } from '../components/media/MediaImage'
 import { MediaRow } from '../components/media/MediaRow'
 import { usePersonDetail } from '../features/person/usePersonDetail'
 
@@ -59,11 +60,11 @@ export function PersonPage() {
     <article className="pb-16">
       <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
         <div className="grid items-start gap-8 sm:grid-cols-[200px_minmax(0,1fr)]">
-          <div className="overflow-hidden rounded-sm bg-elevated">
+          <div className="aspect-2/3 overflow-hidden rounded-sm bg-elevated">
             {profile.photoUrl ? (
-              <img src={profile.photoUrl} alt={profile.name} className="aspect-2/3 w-full object-cover" />
+              <MediaImage src={profile.photoUrl} alt={profile.name} loading="eager" />
             ) : (
-              <div className="flex aspect-2/3 items-end p-4 text-muted">No photo</div>
+              <div className="flex size-full items-end p-4 text-muted">No photo</div>
             )}
           </div>
 

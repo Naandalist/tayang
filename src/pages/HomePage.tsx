@@ -7,12 +7,18 @@ import { usePopularPeople } from '../features/home/usePopularPeople'
 import { useTvList } from '../features/home/useTvList'
 import type { MediaSummary } from '../lib/tmdb'
 
-function pickHero(titles: MediaSummary[] | undefined) {
-  if (!titles || titles.length === 0) {
-    return undefined
-  }
+function pickHeroSlides(...lists: Array<MediaSummary[] | undefined>) {
+  const merged = lists.flatMap((list) => list ?? [])
+  const ranked = [
+    ...merged.filter((item) => item.title.toLowerCase().includes('odyssey')),
+    ...merged.filter((item) => !item.title.toLowerCase().includes('odyssey')),
+  ]
 
-  return titles.find((item) => item.title.toLowerCase().includes('odyssey')) ?? titles[0]
+  return ranked.filter(
+    (item, index, list) =>
+      list.findIndex((entry) => `${entry.mediaType}-${entry.id}` === `${item.mediaType}-${item.id}`) ===
+      index,
+  ).slice(0, 5)
 }
 
 export function HomePage() {
@@ -24,7 +30,7 @@ export function HomePage() {
   const topRatedTv = useTvList('top_rated')
   const people = usePopularPeople()
 
-  const featured = pickHero(nowPlaying.data) ?? pickHero(upcoming.data) ?? pickHero(popularMovies.data)
+  const slides = pickHeroSlides(nowPlaying.data, upcoming.data, popularMovies.data)
   const error =
     nowPlaying.error ??
     popularMovies.error ??
@@ -37,10 +43,10 @@ export function HomePage() {
   return (
     <div className="space-y-10 pb-16">
       {nowPlaying.isPending ? <HeroSkeleton /> : null}
-      {featured ? <HeroBanner item={featured} /> : null}
+      {slides.length > 0 ? <HeroBanner items={slides} /> : null}
 
       {error ? (
-        <p className="px-4 text-sm text-muted">
+        <p className="px-4 text-sm text-muted sm:px-6">
           Katalog belum bisa dimuat. Periksa VITE_TMDB_TOKEN lalu muat ulang.
         </p>
       ) : null}

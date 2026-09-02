@@ -26,7 +26,7 @@ jobs:
       - run: pnpm test
 
   e2e:
-    name: Playwright
+    name: Playwright smoke
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,7 +39,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm test:e2e
+      - run: pnpm test:e2e:smoke
         env:
           CI: true
           VITE_TMDB_TOKEN: test-token

@@ -1,5 +1,8 @@
 import { Link, useParams } from 'react-router-dom'
 import { MediaImage } from '../components/media/MediaImage'
+import { MediaRow } from '../components/media/MediaRow'
+import { MediaRowSkeleton } from '../components/media/CatalogSkeletons'
+import { useSimilarTitles } from '../features/detail/useSimilarTitles'
 import { useTitleDetail } from '../features/detail/useTitleDetail'
 import { titleToSummary } from '../features/watchlist/toSummary'
 import { useWatchlist } from '../features/watchlist/WatchlistProvider'
@@ -37,6 +40,7 @@ export function DetailPage({ mediaType }: DetailPageProps) {
   const { id } = useParams()
   const titleId = parseId(id)
   const detail = useTitleDetail(mediaType, titleId)
+  const similar = useSimilarTitles(mediaType, titleId)
   const watchlist = useWatchlist()
 
   if (detail.isPending) {
@@ -57,6 +61,7 @@ export function DetailPage({ mediaType }: DetailPageProps) {
 
   const title = detail.data
   const saved = watchlist.has(title)
+  const similarTitle = mediaType === 'movie' ? 'Film serupa' : 'Serial serupa'
 
   return (
     <article className="pb-16">
@@ -120,10 +125,18 @@ export function DetailPage({ mediaType }: DetailPageProps) {
       </section>
 
       {title.overview ? (
-        <p className="mx-auto max-w-6xl px-4 pt-8 text-base leading-relaxed text-paper/85 sm:px-6">
+        <p className="mx-auto max-w-6xl px-4 pt-8 pb-10 text-base leading-relaxed text-paper/85 sm:px-6">
           {title.overview}
         </p>
-      ) : null}
+      ) : (
+        <div className="pt-10" />
+      )}
+
+      {similar.isPending ? (
+        <MediaRowSkeleton title={similarTitle} />
+      ) : (
+        <MediaRow title={similarTitle} items={similar.data ?? []} />
+      )}
     </article>
   )
 }

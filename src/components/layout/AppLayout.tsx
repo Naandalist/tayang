@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import { ErrorBoundary } from '../ErrorBoundary'
+import { FollowCursor } from '../FollowCursor'
 import { Footer } from './Footer'
 import { Navbar } from './Navbar'
 
@@ -19,6 +20,7 @@ export function AppLayout() {
         </ErrorBoundary>
       </main>
       <Footer />
+      <FollowCursor />
     </div>
   )
 }

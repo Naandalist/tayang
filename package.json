@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:e2e:smoke": "playwright test tests/e2e/smoke.spec.ts"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.102.8",

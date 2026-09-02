@@ -73,10 +73,11 @@ pnpm preview
 ```bash
 pnpm test
 pnpm exec playwright install chromium
+pnpm test:e2e:smoke
 pnpm test:e2e
 ```
 
-Unit tests cover mappers, image URLs, watchlist storage, and search debounce. End-to-end tests cover navigation, search focus, and empty states. They do not call TMDB.
+CI runs unit tests and the Playwright smoke spec (home, search, 404). Full e2e stays local.
 
 ### Deploy
 

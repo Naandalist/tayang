@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { cn } from '../../lib/cn'
 import type { MediaSummary } from '../../lib/tmdb'
+import { MediaImage } from './MediaImage'
 
 type MediaCardProps = {
   item: MediaSummary
@@ -17,12 +18,7 @@ export function MediaCard({ item, className }: MediaCardProps) {
       <Link to={`/${item.mediaType}/${item.id}`} className="block focus-visible:outline-none">
         <div className="aspect-2/3 overflow-hidden rounded-sm bg-elevated">
           {item.posterUrl ? (
-            <img
-              src={item.posterUrl}
-              alt={item.title}
-              className="size-full object-cover transition-opacity hover:opacity-90"
-              loading="lazy"
-            />
+            <MediaImage src={item.posterUrl} alt={item.title} />
           ) : (
             <div className="flex size-full items-end p-3 text-sm text-muted">No poster</div>
           )}

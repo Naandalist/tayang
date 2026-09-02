@@ -5,7 +5,7 @@ export function Footer() {
         <a
           href="https://www.themoviedb.org/"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           className="inline-flex items-center"
         >
           <img src="/tmdb.svg" alt="The Movie Database" className="h-8 w-auto" />
@@ -20,7 +20,7 @@ export function Footer() {
             <a
               href="https://github.com/Naandalist"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="text-paper underline-offset-4 hover:text-accent hover:underline"
             >
               Listiananda Apriliawan

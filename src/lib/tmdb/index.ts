@@ -11,6 +11,7 @@ export {
 } from './movies'
 export { getPersonDetail, getPopularPeople, personDetailToView, personToSummary } from './people'
 export { searchTitles } from './search'
+export { getSimilarTitles } from './similar'
 export { getPopularTv, getTopRatedTv, getTvList } from './tv'
 export { TMDB_API_BASE, TMDB_IMAGE_BASE, getTmdbToken } from './env'
 

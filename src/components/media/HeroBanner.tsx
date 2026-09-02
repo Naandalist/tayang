@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { cn } from '../../lib/cn'
+import { formatYear } from '../../lib/formatYear'
 import type { MediaSummary } from '../../lib/tmdb'
 import { MediaImage } from './MediaImage'
 
@@ -8,17 +10,14 @@ type HeroBannerProps = {
   items: MediaSummary[]
 }
 
-function yearFromDate(date: string) {
-  return date.slice(0, 4) || '—'
-}
-
 export function HeroBanner({ items }: HeroBannerProps) {
   const slides = items.slice(0, 5)
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
+  const reduceMotion = useReducedMotion()
 
   useEffect(() => {
-    if (paused || slides.length < 2) {
+    if (paused || reduceMotion || slides.length < 2) {
       return
     }
 
@@ -27,7 +26,7 @@ export function HeroBanner({ items }: HeroBannerProps) {
     }, 7000)
 
     return () => window.clearInterval(timer)
-  }, [paused, slides.length])
+  }, [paused, reduceMotion, slides.length])
 
   const item = slides[index]
   if (!item) {
@@ -75,7 +74,7 @@ export function HeroBanner({ items }: HeroBannerProps) {
             {item.title}
           </h1>
           <p className="text-sm text-muted">
-            {yearFromDate(item.date)}
+            {formatYear(item.date)}
             <span className="mx-1.5 text-accent">·</span>
             {item.voteAverage.toFixed(1)} Pts
           </p>

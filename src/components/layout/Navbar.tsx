@@ -19,7 +19,10 @@ export function Navbar() {
           className="font-display text-xl font-medium tracking-tight text-paper"
         >
           Tayang
-          <span className="ml-2 inline-block h-1.5 w-1.5 rounded-full bg-accent align-middle" aria-hidden="true" />
+          <span
+            className="ml-2 inline-block h-1.5 w-1.5 rounded-full bg-accent align-middle animate-heartbeat"
+            aria-hidden="true"
+          />
         </NavLink>
         <ul className="flex items-center gap-6 text-sm">
           {links.map((link) => (

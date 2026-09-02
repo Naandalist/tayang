@@ -5,6 +5,15 @@ import { PeopleRow } from '../components/media/PeopleRow'
 import { useMovieList } from '../features/home/useMovieList'
 import { usePopularPeople } from '../features/home/usePopularPeople'
 import { useTvList } from '../features/home/useTvList'
+import type { MediaSummary } from '../lib/tmdb'
+
+function pickHero(titles: MediaSummary[] | undefined) {
+  if (!titles || titles.length === 0) {
+    return undefined
+  }
+
+  return titles.find((item) => item.title.toLowerCase().includes('odyssey')) ?? titles[0]
+}
 
 export function HomePage() {
   const nowPlaying = useMovieList('now_playing')
@@ -15,7 +24,7 @@ export function HomePage() {
   const topRatedTv = useTvList('top_rated')
   const people = usePopularPeople()
 
-  const featured = nowPlaying.data?.[0]
+  const featured = pickHero(nowPlaying.data) ?? pickHero(upcoming.data) ?? pickHero(popularMovies.data)
   const error =
     nowPlaying.error ??
     popularMovies.error ??
@@ -31,7 +40,7 @@ export function HomePage() {
       {featured ? <HeroBanner item={featured} /> : null}
 
       {error ? (
-        <p className="px-4 text-sm text-muted sm:px-6">
+        <p className="px-4 text-sm text-muted">
           Katalog belum bisa dimuat. Periksa VITE_TMDB_TOKEN lalu muat ulang.
         </p>
       ) : null}

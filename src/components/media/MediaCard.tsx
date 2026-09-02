@@ -14,11 +14,20 @@ function yearFromDate(date: string) {
 
 export function MediaCard({ item, className }: MediaCardProps) {
   return (
-    <article className={cn('w-36 shrink-0 sm:w-40', className)}>
-      <Link to={`/${item.mediaType}/${item.id}`} className="block focus-visible:outline-none">
+    <article
+      className={cn(
+        'w-36 shrink-0 transition-transform duration-300 ease-out hover:-translate-y-1.5 sm:w-40',
+        className,
+      )}
+    >
+      <Link to={`/${item.mediaType}/${item.id}`} className="group block focus-visible:outline-none">
         <div className="aspect-2/3 overflow-hidden rounded-sm bg-elevated">
           {item.posterUrl ? (
-            <MediaImage src={item.posterUrl} alt={item.title} />
+            <MediaImage
+              src={item.posterUrl}
+              alt={item.title}
+              className="transition-opacity duration-300 ease-out group-hover:opacity-80"
+            />
           ) : (
             <div className="flex size-full items-end p-3 text-sm text-muted">No poster</div>
           )}

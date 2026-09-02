@@ -1,7 +1,8 @@
+import { Bookmark, BookmarkCheck } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
+import { MediaRowSkeleton } from '../components/media/CatalogSkeletons'
 import { MediaImage } from '../components/media/MediaImage'
 import { MediaRow } from '../components/media/MediaRow'
-import { MediaRowSkeleton } from '../components/media/CatalogSkeletons'
 import { useSimilarTitles } from '../features/detail/useSimilarTitles'
 import { useTitleDetail } from '../features/detail/useTitleDetail'
 import { titleToSummary } from '../features/watchlist/toSummary'
@@ -62,6 +63,7 @@ export function DetailPage({ mediaType }: DetailPageProps) {
   const title = detail.data
   const saved = watchlist.has(title)
   const similarTitle = mediaType === 'movie' ? 'Film serupa' : 'Serial serupa'
+  const WatchlistIcon = saved ? BookmarkCheck : Bookmark
 
   return (
     <article className="pb-16">
@@ -115,8 +117,9 @@ export function DetailPage({ mediaType }: DetailPageProps) {
                 type="button"
                 onClick={() => watchlist.toggle(titleToSummary(title))}
                 aria-pressed={saved}
-                className="mt-2 text-sm text-accent underline-offset-4 hover:underline"
+                className="mt-2 inline-flex items-center gap-2 text-sm text-accent underline-offset-4 hover:underline"
               >
+                <WatchlistIcon className="size-3.5" strokeWidth={1.5} />
                 {saved ? 'Hapus dari watchlist' : 'Simpan ke watchlist'}
               </button>
             </div>

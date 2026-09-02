@@ -2,8 +2,10 @@ import { useEffect, useId, useRef, useState } from 'react'
 import { MediaCard } from '../components/media/MediaCard'
 import { useTitleSearch } from '../features/search/useTitleSearch'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 export function SearchPage() {
+  useDocumentTitle('Cari · Tayang')
   const inputId = useId()
   const hintId = useId()
   const statusId = useId()

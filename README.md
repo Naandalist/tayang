@@ -1,5 +1,6 @@
 # Tayang
 
+[![Live](https://img.shields.io/badge/Live-tayang.naandalist.com-c4a574?labelColor=0c0c0b)](https://tayang.naandalist.com/)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=111)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=fff)](https://www.typescriptlang.org)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=fff)](https://vite.dev)
@@ -7,10 +8,10 @@
 [![TanStack Query](https://img.shields.io/badge/TanStack_Query-5-FF4154?logo=reactquery&logoColor=fff)](https://tanstack.com/query)
 [![pnpm](https://img.shields.io/badge/pnpm-10-F69220?logo=pnpm&logoColor=fff)](https://pnpm.io)
 
-Editorial movie and TV catalog powered by [TMDB](https://www.themoviedb.org/). Dark, restrained UI — not a Netflix clone.
+Editorial movie and TV catalog powered by [TMDB](https://www.themoviedb.org/). Dark, restrained UI. Not a Netflix clone.
 
+- Live demo: [tayang.naandalist.com](https://tayang.naandalist.com/)
 - Repository: [github.com/Naandalist/tayang](https://github.com/Naandalist/tayang)
-- Live demo: add the Vercel URL here after the first production deploy
 
 ## Features
 
@@ -81,7 +82,7 @@ CI runs unit tests and the Playwright smoke spec (home, search, 404). Full e2e s
 
 ### Deploy
 
-Vercel works with the default Vite preset. Add `VITE_TMDB_TOKEN` as a project environment variable for Production and Preview, then deploy `main`.
+Production is on Vercel at [tayang.naandalist.com](https://tayang.naandalist.com/). The default Vite preset is enough. Add `VITE_TMDB_TOKEN` as a project environment variable for Production and Preview, then deploy `main`.
 
 Do not commit `.env`.
 

@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
+import { MediaImage } from '../components/media/MediaImage'
 import { useTitleDetail } from '../features/detail/useTitleDetail'
 import { titleToSummary } from '../features/watchlist/toSummary'
 import { useWatchlist } from '../features/watchlist/WatchlistProvider'
@@ -61,19 +62,20 @@ export function DetailPage({ mediaType }: DetailPageProps) {
     <article className="pb-16">
       <section className="relative isolate min-h-[80svh] overflow-hidden bg-elevated">
         {title.backdropUrl ? (
-          <img
+          <MediaImage
             src={title.backdropUrl}
             alt=""
-            className="absolute inset-0 size-full object-cover object-top"
+            loading="eager"
+            className="absolute inset-0 object-top"
           />
         ) : null}
         <div className="absolute inset-0 bg-linear-to-t from-app from-15% via-app/80 to-app/20" />
 
         <div className="relative mx-auto flex min-h-[80svh] max-w-6xl items-end px-4 pb-10 pt-28 sm:px-6 sm:pb-14">
           <div className="grid w-full items-end gap-6 sm:grid-cols-[180px_minmax(0,1fr)] sm:gap-8">
-            <div className="hidden overflow-hidden rounded-sm bg-elevated sm:block">
+            <div className="hidden aspect-2/3 overflow-hidden rounded-sm bg-elevated sm:block">
               {title.posterUrl ? (
-                <img src={title.posterUrl} alt={title.title} className="aspect-2/3 w-full object-cover" />
+                <MediaImage src={title.posterUrl} alt={title.title} loading="eager" />
               ) : null}
             </div>
 

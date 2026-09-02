@@ -8,6 +8,32 @@
   --color-accent: #c4a574;
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --animate-heartbeat: heartbeat 1.8s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  16% {
+    opacity: 0.15;
+    transform: scale(0.65);
+  }
+  32% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  48% {
+    opacity: 0.15;
+    transform: scale(0.65);
+  }
+  64%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 html,
@@ -33,4 +59,10 @@ body {
 
 .row-scroll::-webkit-scrollbar {
   display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-heartbeat {
+    animation: none;
+  }
 }

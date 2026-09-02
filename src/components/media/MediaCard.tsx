@@ -20,12 +20,16 @@ export function MediaCard({ item, className }: MediaCardProps) {
         className,
       )}
     >
-      <Link to={`/${item.mediaType}/${item.id}`} className="group block focus-visible:outline-none">
+      <Link
+        to={`/${item.mediaType}/${item.id}`}
+        className="group block"
+        aria-label={`${item.title}, ${yearFromDate(item.date)}, ${item.voteAverage.toFixed(1)} Pts`}
+      >
         <div className="aspect-2/3 overflow-hidden rounded-sm bg-elevated">
           {item.posterUrl ? (
             <MediaImage
               src={item.posterUrl}
-              alt={item.title}
+              alt=""
               className="transition-opacity duration-300 ease-out group-hover:opacity-80"
             />
           ) : (

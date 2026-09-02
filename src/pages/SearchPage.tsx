@@ -5,6 +5,8 @@ import { useDebouncedValue } from '../hooks/useDebouncedValue'
 
 export function SearchPage() {
   const inputId = useId()
+  const hintId = useId()
+  const statusId = useId()
   const inputRef = useRef<HTMLInputElement>(null)
   const [query, setQuery] = useState('')
   const debouncedQuery = useDebouncedValue(query, 400)
@@ -24,27 +26,44 @@ export function SearchPage() {
       <p className="text-xs uppercase tracking-[0.28em] text-accent">Cari</p>
       <h1 className="mt-3 font-display text-4xl font-medium tracking-tight">Cari judul</h1>
 
-      <label htmlFor={inputId} className="sr-only">
-        Cari film atau serial
-      </label>
-      <input
-        ref={inputRef}
-        id={inputId}
-        type="search"
-        value={query}
-        onChange={(event) => setQuery(event.target.value)}
-        placeholder="Spider-Man, The Bear, Parasite"
-        autoComplete="off"
-        autoFocus
-        className="mt-8 w-full border-b border-paper/20 bg-transparent py-3 text-lg text-paper outline-none placeholder:text-muted focus:border-accent"
-      />
+      <form role="search" onSubmit={(event) => event.preventDefault()}>
+        <label htmlFor={inputId} className="sr-only">
+          Cari film atau serial
+        </label>
+        <input
+          ref={inputRef}
+          id={inputId}
+          type="search"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="Spider-Man, The Bear, Parasite"
+          autoComplete="off"
+          autoFocus
+          aria-describedby={hintId}
+          className="mt-8 w-full border-b border-paper/20 bg-transparent py-3 text-lg text-paper outline-none placeholder:text-muted focus:border-accent"
+        />
+      </form>
 
       {!hasQuery ? (
-        <p className="mt-6 text-sm text-muted">Ketik minimal dua huruf.</p>
-      ) : null}
+        <p id={hintId} className="mt-6 text-sm text-muted">
+          Ketik minimal dua huruf.
+        </p>
+      ) : (
+        <p id={hintId} className="sr-only">
+          Hasil diperbarui saat mengetik.
+        </p>
+      )}
+
+      <div id={statusId} role="status" aria-live="polite" className="sr-only">
+        {showSkeleton ? 'Memuat hasil pencarian' : null}
+        {showEmpty ? `Tidak ada hasil untuk ${debouncedQuery}` : null}
+        {!showSkeleton && results.length > 0 ? `${results.length} hasil ditemukan` : null}
+      </div>
 
       {search.isError ? (
-        <p className="mt-6 text-sm text-muted">Pencarian gagal. Coba lagi beberapa saat.</p>
+        <p className="mt-6 text-sm text-muted" role="alert">
+          Pencarian gagal. Coba lagi beberapa saat.
+        </p>
       ) : null}
 
       {showSkeleton ? (

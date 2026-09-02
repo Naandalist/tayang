@@ -82,6 +82,7 @@ export type TmdbCredit = {
   vote_average?: number
   popularity?: number
   character?: string
+  adult?: boolean
 }
 
 export type TmdbPersonDetail = {

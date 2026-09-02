@@ -55,7 +55,13 @@ export function HorizontalScroller({
 
   return (
     <div className="relative">
-      <div ref={ref} className={cn('row-scroll overflow-x-auto', className)}>
+      <div
+        ref={ref}
+        className={cn('row-scroll overflow-x-auto', className)}
+        tabIndex={0}
+        role="region"
+        aria-label={label}
+      >
         {children}
       </div>
 
@@ -69,7 +75,7 @@ export function HorizontalScroller({
             controlClassName,
           )}
         >
-          <ChevronLeft className="size-5" strokeWidth={1.75} />
+          <ChevronLeft className="size-5" strokeWidth={1.75} aria-hidden="true" />
         </button>
       ) : null}
 
@@ -83,7 +89,7 @@ export function HorizontalScroller({
             controlClassName,
           )}
         >
-          <ChevronRight className="size-5" strokeWidth={1.75} />
+          <ChevronRight className="size-5" strokeWidth={1.75} aria-hidden="true" />
         </button>
       ) : null}
     </div>

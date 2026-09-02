@@ -37,8 +37,16 @@ export function HeroBanner({ items }: HeroBannerProps) {
   return (
     <section
       className="relative isolate min-h-[72svh] overflow-hidden bg-elevated"
+      aria-roledescription="carousel"
+      aria-label="Sorotan sedang tayang"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          setPaused(false)
+        }
+      }
     >
       {slides.map((slide, slideIndex) =>
         slide.backdropUrl ? (
@@ -48,6 +56,7 @@ export function HeroBanner({ items }: HeroBannerProps) {
               'absolute inset-0 transition-opacity duration-700 ease-out',
               slideIndex === index ? 'opacity-100' : 'opacity-0',
             )}
+            aria-hidden={slideIndex !== index}
           >
             <MediaImage
               src={slide.backdropUrl}
@@ -77,21 +86,27 @@ export function HeroBanner({ items }: HeroBannerProps) {
             to={`/${item.mediaType}/${item.id}`}
             className="inline-block text-sm text-accent underline-offset-4 hover:underline"
           >
-            Lihat detail
+            Lihat detail {item.title}
           </Link>
           {slides.length > 1 ? (
-            <div className="flex gap-2 pt-4">
+            <div className="flex gap-1 pt-4" role="tablist" aria-label="Pilih sorotan">
               {slides.map((slide, slideIndex) => (
                 <button
                   key={`${slide.mediaType}-${slide.id}-dot`}
                   type="button"
-                  onClick={() => setIndex(slideIndex)}
-                  className={cn(
-                    'size-1.5 rounded-full transition-colors duration-300',
-                    slideIndex === index ? 'bg-accent' : 'bg-paper/25 hover:bg-paper/50',
-                  )}
+                  role="tab"
+                  aria-selected={slideIndex === index}
                   aria-label={`Tampilkan ${slide.title}`}
-                />
+                  onClick={() => setIndex(slideIndex)}
+                  className="flex size-6 items-center justify-center"
+                >
+                  <span
+                    className={cn(
+                      'size-1.5 rounded-full transition-colors duration-300',
+                      slideIndex === index ? 'bg-accent' : 'bg-paper/25',
+                    )}
+                  />
+                </button>
               ))}
             </div>
           ) : null}

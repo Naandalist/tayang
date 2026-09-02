@@ -25,6 +25,7 @@ export function WatchlistPage() {
               <button
                 type="button"
                 onClick={() => toggle(item)}
+                aria-label={`Hapus ${item.title} dari watchlist`}
                 className="mt-2 text-xs text-muted underline-offset-4 hover:text-paper hover:underline"
               >
                 Hapus

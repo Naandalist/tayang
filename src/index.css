@@ -8,28 +8,28 @@
   --color-accent: #c4a574;
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Fraunces", ui-serif, Georgia, serif;
-  --animate-heartbeat: heartbeat 1.8s ease-in-out infinite;
+  --animate-heartbeat: heartbeat 3.6s ease-in-out infinite;
 }
 
 @keyframes heartbeat {
   0%,
-  100% {
+  18% {
     opacity: 1;
     transform: scale(1);
   }
-  16% {
-    opacity: 0.15;
-    transform: scale(0.65);
+  30% {
+    opacity: 0.2;
+    transform: scale(0.85);
   }
-  32% {
+  42% {
     opacity: 1;
     transform: scale(1);
   }
-  48% {
-    opacity: 0.15;
-    transform: scale(0.65);
+  54% {
+    opacity: 0.2;
+    transform: scale(0.85);
   }
-  64%,
+  66%,
   100% {
     opacity: 1;
     transform: scale(1);

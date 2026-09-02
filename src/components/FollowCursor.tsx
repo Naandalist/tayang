@@ -46,20 +46,20 @@ export function FollowCursor({
     let canvas: HTMLCanvasElement | null = null
     let frame = 0
     let onMove: ((event: MouseEvent) => void) | null = null
-    let resize: (() => void) | null = null
+    let onCanvasResize: (() => void) | null = null
 
     const stop = () => {
       window.cancelAnimationFrame(frame)
       if (onMove) {
         window.removeEventListener('mousemove', onMove)
       }
-      if (resize) {
-        window.removeEventListener('resize', resize)
+      if (onCanvasResize) {
+        window.removeEventListener('resize', onCanvasResize)
       }
       canvas?.remove()
       canvas = null
       onMove = null
-      resize = null
+      onCanvasResize = null
       frame = 0
     }
 
@@ -85,7 +85,7 @@ export function FollowCursor({
       canvas = node
 
       const dpr = window.devicePixelRatio || 1
-      resize = () => {
+      onCanvasResize = () => {
         node.width = window.innerWidth * dpr
         node.height = window.innerHeight * dpr
         context.setTransform(dpr, 0, 0, dpr, 0, 0)
@@ -104,9 +104,9 @@ export function FollowCursor({
         frame = window.requestAnimationFrame(tick)
       }
 
-      resize()
+      onCanvasResize()
       window.addEventListener('mousemove', onMove)
-      window.addEventListener('resize', resize)
+      window.addEventListener('resize', onCanvasResize)
       frame = window.requestAnimationFrame(tick)
     }
 
@@ -122,10 +122,12 @@ export function FollowCursor({
     sync()
     reduceMotion.addEventListener('change', sync)
     coarsePointer.addEventListener('change', sync)
+    window.addEventListener('resize', sync)
 
     return () => {
       reduceMotion.removeEventListener('change', sync)
       coarsePointer.removeEventListener('change', sync)
+      window.removeEventListener('resize', sync)
       stop()
     }
   }, [color, zIndex])

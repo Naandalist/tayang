@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import type { PersonSummary } from '../../lib/tmdb'
 import { HorizontalScroller } from './HorizontalScroller'
+import { MediaImage } from './MediaImage'
 
 type PeopleRowProps = {
   title: string
@@ -26,12 +27,7 @@ export function PeopleRow({ title, people }: PeopleRowProps) {
               <Link to={`/person/${person.id}`} className="block focus-visible:outline-none">
                 <div className="mx-auto size-24 overflow-hidden rounded-full bg-elevated sm:size-28">
                   {person.photoUrl ? (
-                    <img
-                      src={person.photoUrl}
-                      alt={person.name}
-                      className="size-full object-cover object-top"
-                      loading="lazy"
-                    />
+                    <MediaImage src={person.photoUrl} alt={person.name} className="object-top" />
                   ) : (
                     <div className="flex size-full items-center justify-center text-xs text-muted">
                       {person.name.slice(0, 1)}

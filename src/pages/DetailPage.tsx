@@ -7,6 +7,7 @@ import { useSimilarTitles } from '../features/detail/useSimilarTitles'
 import { useTitleDetail } from '../features/detail/useTitleDetail'
 import { titleToSummary } from '../features/watchlist/toSummary'
 import { useWatchlist } from '../features/watchlist/WatchlistProvider'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import type { MediaType } from '../lib/tmdb'
 
 type DetailPageProps = {
@@ -43,6 +44,7 @@ export function DetailPage({ mediaType }: DetailPageProps) {
   const detail = useTitleDetail(mediaType, titleId)
   const similar = useSimilarTitles(mediaType, titleId)
   const watchlist = useWatchlist()
+  useDocumentTitle(detail.data ? `${detail.data.title} · Tayang` : 'Tayang')
 
   if (detail.isPending) {
     return <DetailSkeleton />
